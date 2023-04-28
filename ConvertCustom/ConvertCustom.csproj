@@ -2,13 +2,13 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageId>ConvertCustom</PackageId>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
     <Version>1.1.107</Version>
     <Authors>Red</Authors>
     <RepositoryUrl>https://github.com/Yratilos/ConvertCustom.git</RepositoryUrl>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageLicenseFile>LICENSE.txt</PackageLicenseFile>
+    <Title>ConvertCustom</Title>
   </PropertyGroup>
 
   <ItemGroup>

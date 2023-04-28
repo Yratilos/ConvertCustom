@@ -5,12 +5,24 @@ using System.Reflection;
 
 namespace ConvertCustom.Server
 {
+    /// <summary>
+    /// 转换实体
+    /// </summary>
     public static class ModelType
     {
+        /// <summary>
+        /// 实体映射
+        /// 只映射与Input相同的属性和字段
+        /// </summary>
+        /// <typeparam name="Output"></typeparam>
+        /// <typeparam name="Input"></typeparam>
+        /// <param name="output"></param>
+        /// <param name="input"></param>
         public static void EntityMapper<Output, Input>(Output output, Input input) where Output : class where Input : class
         {
             Type outputType = typeof(Output);
             Type inputType = typeof(Input);
+            // 属性
             PropertyInfo[] properties = outputType.GetProperties();
             foreach (PropertyInfo prop in properties)
             {
@@ -21,6 +33,7 @@ namespace ConvertCustom.Server
                     prop.SetValue(output, inValue);
                 }
             }
+            // 字段
             FieldInfo[] fields = outputType.GetFields();
             foreach (FieldInfo field in fields)
             {
@@ -33,6 +46,13 @@ namespace ConvertCustom.Server
             }
         }
 
+        /// <summary>
+        /// 实体映射
+        /// </summary>
+        /// <typeparam name="Output"></typeparam>
+        /// <typeparam name="Input"></typeparam>
+        /// <param name="input"></param>
+        /// <returns></returns>
         public static Output EntityMapper<Output, Input>(Input input) where Output : class where Input : class
         {
             Output val = Activator.CreateInstance<Output>();
@@ -40,6 +60,14 @@ namespace ConvertCustom.Server
             return val;
         }
 
+        /// <summary>
+        /// 可转枚举
+        /// </summary>
+        /// <typeparam name="K">notnull</typeparam>
+        /// <typeparam name="V"></typeparam>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dic"></param>
+        /// <returns></returns>
         public static T Parse<K, V, T>(Dictionary<K, V> dic) where T : class
         {
             Type typeFromHandle = typeof(T);
@@ -56,6 +84,12 @@ namespace ConvertCustom.Server
             return (T)tempT;
         }
 
+        /// <summary>
+        /// 可转枚举
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dr"></param>
+        /// <returns></returns>
         public static T Parse<T>(DataRow dr)
         {
             Type typeFromHandle = typeof(T);
@@ -73,6 +107,12 @@ namespace ConvertCustom.Server
             return (T)tempT;
         }
 
+        /// <summary>
+        /// 可转枚举
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="dt"></param>
+        /// <returns></returns>
         public static List<T> ParseList<T>(DataTable dt)
         {
             List<T> list = new List<T>();
@@ -103,5 +143,4 @@ namespace ConvertCustom.Server
             }
         }
     }
-
 }

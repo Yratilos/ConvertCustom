@@ -3,12 +3,12 @@
 namespace ConvertCustom
 {
     /// <summary>
-    /// 常规转换
+    /// 常用基本类型转换
     /// </summary>
     public static class TypeConversion
     {
         /// <summary>
-        /// 转换为布尔值
+        /// ToBoolean
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="text"></param>
@@ -23,7 +23,7 @@ namespace ConvertCustom
         }
 
         /// <summary>
-        /// 转换为时间类型
+        /// ToDateTime
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="text"></param>
@@ -42,7 +42,7 @@ namespace ConvertCustom
         }
 
         /// <summary>
-        /// 转换为金额类型
+        /// ToDecimal
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="text"></param>
@@ -57,7 +57,7 @@ namespace ConvertCustom
         }
 
         /// <summary>
-        /// 转换为双精度
+        /// ToDouble
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="text"></param>
@@ -72,7 +72,7 @@ namespace ConvertCustom
         }
 
         /// <summary>
-        /// 转换为单精度
+        /// ToFloat
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="text"></param>
@@ -87,7 +87,7 @@ namespace ConvertCustom
         }
 
         /// <summary>
-        /// 转换为整数
+        /// ToInt
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <param name="text"></param>

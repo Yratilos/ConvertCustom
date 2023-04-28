@@ -8,13 +8,31 @@ using System.IO;
 
 namespace ConvertCustom.Server
 {
+    /// <summary>
+    /// 转换二进制流
+    /// </summary>
     public static class FileType
     {
+        /// <summary>
+        /// Excel
+        /// NPOI生成文件，读取二进制流后删除文件
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="type">.xlsx/.xls</param>
+        /// <returns></returns>
         public static byte[] ParseExcelByte(DataTable dt, string type)
         {
             return ParseExcelBytes(new List<DataTable> { dt }, type);
         }
 
+        /// <summary>
+        /// Excel
+        /// NPOI生成文件，读取二进制流后删除文件
+        /// </summary>
+        /// <param name="dts"></param>
+        /// <param name="type">.xlsx/.xls</param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
         public static byte[] ParseExcelBytes(List<DataTable> dts, string type)
         {
             IWorkbook workbook;
@@ -22,13 +40,13 @@ namespace ConvertCustom.Server
             {
                 workbook = new XSSFWorkbook();
             }
+            else if (type == ".xls")
+            {
+                workbook = new HSSFWorkbook();
+            }
             else
             {
-                if (!(type == ".xls"))
-                {
-                    throw new ArgumentException("请添加文件名后缀为xlsx或lsx。");
-                }
-                workbook = new HSSFWorkbook();
+                throw new ArgumentException("请添加文件名后缀为xlsx或lsx。");
             }
             for (int d = 0; d < dts.Count; d++)
             {
@@ -49,7 +67,7 @@ namespace ConvertCustom.Server
                 }
             }
             FileStream fs = new FileStream(Guid.NewGuid().ToString() + type, FileMode.Create, FileAccess.ReadWrite);
-            workbook.Write((Stream)fs, true);
+            workbook.Write(fs, true);
             fs = new FileStream(fs.Name, FileMode.Open);
             byte[] bytes = new byte[(int)fs.Length];
             fs.Read(bytes, 0, bytes.Length);
@@ -58,5 +76,4 @@ namespace ConvertCustom.Server
             return bytes;
         }
     }
-
 }
