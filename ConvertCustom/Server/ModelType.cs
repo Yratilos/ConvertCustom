@@ -129,7 +129,7 @@ namespace ConvertCustom.Server
             {
                 type = Nullable.GetUnderlyingType(pi.PropertyType);
             }
-            if (string.IsNullOrEmpty(name.ToString()))
+            if (name == null)
             {
                 pi.SetValue(tempT, Activator.CreateInstance(type), null);
             }
