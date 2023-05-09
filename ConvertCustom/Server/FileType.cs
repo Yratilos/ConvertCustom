@@ -67,7 +67,7 @@ namespace ConvertCustom.Server
                 }
             }
             FileStream fs = new FileStream(Guid.NewGuid().ToString() + type, FileMode.Create, FileAccess.ReadWrite);
-            workbook.Write(fs, true);
+            workbook.Write(fs);
             fs = new FileStream(fs.Name, FileMode.Open);
             byte[] bytes = new byte[(int)fs.Length];
             fs.Read(bytes, 0, bytes.Length);
