@@ -6,8 +6,8 @@
         {
             //TestEnum();
             //System.TestAttribute();
-            System.TestMapSystem(new System() { Linux = "Centos", Windows = "Win11" });
-            System.TestMapSystem(new System() { Linux = null, Windows = "" });
+            //System.TestMapSystem(new System() { Linux = "Centos", Windows = "Win11" });
+            //System.TestMapSystem(new System() { Linux = null, Windows = "" });
             //System.MapDictionaryToEntity(new Dictionary<string, string>
             //{
             //    {"Linux","Centos" },

@@ -5,9 +5,17 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <GenerateDocumentationFile>True</GenerateDocumentationFile>
-    <DocumentationFile>F:\Microsoft\Test\TestXMLFile.xml</DocumentationFile>
+    <GenerateDocumentationFile>False</GenerateDocumentationFile>
+    <DocumentationFile></DocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SqlSugarCore" Version="5.1.4.71" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ConvertCustom\ConvertCustom.csproj" />
+  </ItemGroup>
 
   <ItemGroup>
     <None Update="TestXMLFile.xml">
