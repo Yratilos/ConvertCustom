@@ -37,6 +37,52 @@ namespace ConvertCustom.Server
         /// <exception cref="ArgumentException"></exception>
         public static byte[] ParseExcelBytes(List<DataTable> dts, string type)
         {
+            FileStream fs = new FileStream(Guid.NewGuid().ToString() + type, FileMode.Create, FileAccess.ReadWrite);
+            GetWorkbook(dts, type).Write(fs);
+            fs = new FileStream(fs.Name, FileMode.Open);
+            byte[] bytes = new byte[(int)fs.Length];
+            fs.Read(bytes, 0, bytes.Length);
+            fs.Close();
+            File.Delete(fs.Name);
+            return bytes;
+        }
+
+        /// <summary>
+        /// Excel
+        /// NPOI生成文件,不删除文件
+        /// </summary>
+        /// <param name="dt"></param>
+        /// <param name="fileName">.xlsx/.xls后缀</param>
+        /// <returns></returns>
+        public static string ParseExcelURL(DataTable dt, string fileName)
+        {
+            return ParseExcelURLs(new List<DataTable> { dt }, fileName);
+        }
+
+        /// <summary>
+        /// Excel
+        /// NPOI生成文件,不删除文件
+        /// </summary>
+        /// <param name="dts"></param>
+        /// <param name="fileName">.xlsx/.xls后缀</param>
+        /// <returns>文件本地路径</returns>
+        public static string ParseExcelURLs(List<DataTable> dts, string fileName)
+        {
+            var extension = Path.GetExtension(fileName);
+            FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite);
+            GetWorkbook(dts, extension).Write(fs);
+            return fs.Name;
+        }
+
+        /// <summary>
+        /// 获取NPOI
+        /// </summary>
+        /// <param name="dts"></param>
+        /// <param name="type"></param>
+        /// <returns></returns>
+        /// <exception cref="ArgumentException"></exception>
+        private static IWorkbook GetWorkbook(List<DataTable> dts, string type)
+        {
             IWorkbook workbook;
             if (type == ".xlsx")
             {
@@ -68,14 +114,7 @@ namespace ConvertCustom.Server
                     }
                 }
             }
-            FileStream fs = new FileStream(Guid.NewGuid().ToString() + type, FileMode.Create, FileAccess.ReadWrite);
-            workbook.Write(fs);
-            fs = new FileStream(fs.Name, FileMode.Open);
-            byte[] bytes = new byte[(int)fs.Length];
-            fs.Read(bytes, 0, bytes.Length);
-            fs.Close();
-            File.Delete(fs.Name);
-            return bytes;
+            return workbook;
         }
 
         /// <summary>
