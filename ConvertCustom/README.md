@@ -1,23 +1,35 @@
-### ALL
-#### Base type
-namespace ConvertCustom 
-ToBoolean ToDateTime ToDecimal ToDouble ToFloat ToInt
+## ALL
+### Base type
+#### namespace ConvertCustom
+ToBoolean<br/>
+ToDateTime<br/>
+ToDecimal<br/>
+ToDouble<br/>
+ToFloat<br/>
+ToInt
 
 > Like ToString,The error returns null
 
-#### Advanced type
-namespace ConvertCustom.Server 
-DataTableType DictionaryType FileType ModelType
+### Advanced type
+#### namespace ConvertCustom.Server
+DataTableType<br/>
+DictionaryType<br/>
+FileType<br/>
+ModelType
 
 > Like Parse,And also Parse*
 
 ModelType.EntityMapper
 
-#### Other
-##### namespace ConvertCustom.Server
+##### Other
 ###### ADONET
 > Simple database operations
 
-ADONET.GetInstance
-ExecuteScalar
+ADONET.GetInstance<br/>
+ExecuteScalar<br/>
 Execute
+
+###### FileType
+> Simple database operations
+
+CreateVerifyImg

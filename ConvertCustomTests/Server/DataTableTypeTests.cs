@@ -1,5 +1,4 @@
-﻿using ConvertCustom.Server;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data;
 
 namespace ConvertCustom.Server.Tests
@@ -7,12 +6,6 @@ namespace ConvertCustom.Server.Tests
     [TestClass()]
     public class DataTableTypeTests
     {
-        [TestMethod()]
-        public void ParseListTest()
-        {
-            //Assert.Fail();
-        }
-
         [TestMethod()]
         [DataRow("field1,field2", "value1,value2", "value3,value4")]
         [DataRow("field1,field2", "value1,value2", "value3,")]
