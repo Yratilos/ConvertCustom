@@ -9,13 +9,6 @@ namespace ConvertCustom.Server
     /// </summary>
     public static class DictionaryType
     {
-        /// <summary>
-        /// From DataRow
-        /// </summary>
-        /// <typeparam name="K"></typeparam>
-        /// <typeparam name="V"></typeparam>
-        /// <param name="dr"></param>
-        /// <returns></returns>
         public static Dictionary<K, V> Parse<K, V>(DataRow dr)
         {
             Dictionary<K, V> dic = new Dictionary<K, V>();
@@ -27,13 +20,6 @@ namespace ConvertCustom.Server
             return dic;
         }
 
-        /// <summary>
-        /// From DataTable
-        /// </summary>
-        /// <typeparam name="K"></typeparam>
-        /// <typeparam name="V"></typeparam>
-        /// <param name="table"></param>
-        /// <returns></returns>
         public static List<Dictionary<K, V>> ParseList<K, V>(DataTable table)
         {
             List<Dictionary<K, V>> lstDic = new List<Dictionary<K, V>>();

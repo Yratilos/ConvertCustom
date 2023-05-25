@@ -10,7 +10,7 @@ namespace ConvertCustom.Server
     {
         private static ADONET instance = null;
         private static readonly object padlock = new object();
-        private string conn = "server={0};uid={1};pwd={2};database={3}";
+        private readonly string conn = "server={0};uid={1};pwd={2};database={3}";
 
         private ADONET(string conn)
         {

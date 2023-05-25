@@ -14,9 +14,6 @@ namespace ConvertCustom.Server
         /// From ListDictionary
         /// </summary>
         /// <typeparam name="K">notnull</typeparam>
-        /// <typeparam name="V"></typeparam>
-        /// <param name="listDic"></param>
-        /// <returns></returns>
         public static DataTable Parse<K, V>(List<Dictionary<K, V>> listDic)
         {
             DataTable dt = new DataTable();
@@ -40,24 +37,11 @@ namespace ConvertCustom.Server
             return dt;
         }
 
-        /// <summary>
-        /// From Dictionary
-        /// </summary>
-        /// <typeparam name="K"></typeparam>
-        /// <typeparam name="V"></typeparam>
-        /// <param name="dic"></param>
-        /// <returns></returns>
         public static DataRow Parse<K, V>(Dictionary<K, V> dic)
         {
             return Parse(new List<Dictionary<K, V>> { dic }).Rows[0];
         }
 
-        /// <summary>
-        /// From List Object
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="list"></param>
-        /// <returns></returns>
         public static DataTable Parse<T>(List<T> list) where T : class
         {
             DataTable dt = new DataTable();
@@ -85,12 +69,6 @@ namespace ConvertCustom.Server
             return dt;
         }
 
-        /// <summary>
-        /// From Object
-        /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="entity"></param>
-        /// <returns></returns>
         public static DataRow Parse<T>(T entity) where T : class
         {
             return Parse(new List<T> { entity }).Rows[0];
@@ -100,8 +78,6 @@ namespace ConvertCustom.Server
         /// Excel
         /// NPOI解析
         /// </summary>
-        /// <param name="workbook"></param>
-        /// <returns></returns>
         public static List<DataTable> ParseList(IWorkbook workbook)
         {
             List<DataTable> tables = new List<DataTable>();

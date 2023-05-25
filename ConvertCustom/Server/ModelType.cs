@@ -14,10 +14,8 @@ namespace ConvertCustom.Server
         /// 实体映射
         /// 只映射与Input相同的属性和字段
         /// </summary>
-        /// <typeparam name="Output"></typeparam>
-        /// <typeparam name="Input"></typeparam>
-        /// <param name="output"></param>
-        /// <param name="input"></param>
+        /// <param name="output">输出</param>
+        /// <param name="input">输入</param>
         public static void EntityMapper<Output, Input>(Output output, Input input) where Output : class where Input : class
         {
             Type outputType = typeof(Output);
@@ -49,10 +47,6 @@ namespace ConvertCustom.Server
         /// <summary>
         /// 实体映射
         /// </summary>
-        /// <typeparam name="Output"></typeparam>
-        /// <typeparam name="Input"></typeparam>
-        /// <param name="input"></param>
-        /// <returns></returns>
         public static Output EntityMapper<Output, Input>(Input input) where Output : class where Input : class
         {
             Output val = Activator.CreateInstance<Output>();
@@ -64,10 +58,6 @@ namespace ConvertCustom.Server
         /// 可转枚举
         /// </summary>
         /// <typeparam name="K">notnull</typeparam>
-        /// <typeparam name="V"></typeparam>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="dic"></param>
-        /// <returns></returns>
         public static T Parse<K, V, T>(Dictionary<K, V> dic) where T : class
         {
             Type typeFromHandle = typeof(T);
@@ -87,9 +77,6 @@ namespace ConvertCustom.Server
         /// <summary>
         /// 可转枚举
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="dr"></param>
-        /// <returns></returns>
         public static T Parse<T>(DataRow dr)
         {
             Type typeFromHandle = typeof(T);
@@ -110,9 +97,6 @@ namespace ConvertCustom.Server
         /// <summary>
         /// 可转枚举
         /// </summary>
-        /// <typeparam name="T"></typeparam>
-        /// <param name="dt"></param>
-        /// <returns></returns>
         public static List<T> ParseList<T>(DataTable dt)
         {
             List<T> list = new List<T>();
@@ -123,6 +107,9 @@ namespace ConvertCustom.Server
             return list;
         }
 
+        /// <summary>
+        /// 设置字段值
+        /// </summary>
         private static void SetField<V>(object tempT, PropertyInfo pi, V name, Type type)
         {
             if (type.IsGenericType && type.GetGenericTypeDefinition().Equals(typeof(Nullable<>)))

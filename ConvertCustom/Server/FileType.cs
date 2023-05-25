@@ -19,9 +19,7 @@ namespace ConvertCustom.Server
         /// Excel
         /// NPOI生成文件，读取二进制流后删除文件
         /// </summary>
-        /// <param name="dt"></param>
         /// <param name="type">.xlsx/.xls</param>
-        /// <returns></returns>
         public static byte[] ParseExcelByte(DataTable dt, string type)
         {
             return ParseExcelBytes(new List<DataTable> { dt }, type);
@@ -31,10 +29,7 @@ namespace ConvertCustom.Server
         /// Excel
         /// NPOI生成文件，读取二进制流后删除文件
         /// </summary>
-        /// <param name="dts"></param>
         /// <param name="type">.xlsx/.xls</param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
         public static byte[] ParseExcelBytes(List<DataTable> dts, string type)
         {
             FileStream fs = new FileStream(Guid.NewGuid().ToString() + type, FileMode.Create, FileAccess.ReadWrite);
@@ -51,9 +46,7 @@ namespace ConvertCustom.Server
         /// Excel
         /// NPOI生成文件,不删除文件
         /// </summary>
-        /// <param name="dt"></param>
         /// <param name="fileName">.xlsx/.xls后缀</param>
-        /// <returns></returns>
         public static string ParseExcelURL(DataTable dt, string fileName)
         {
             return ParseExcelURLs(new List<DataTable> { dt }, fileName);
@@ -63,7 +56,6 @@ namespace ConvertCustom.Server
         /// Excel
         /// NPOI生成文件,不删除文件
         /// </summary>
-        /// <param name="dts"></param>
         /// <param name="fileName">.xlsx/.xls后缀</param>
         /// <returns>文件本地路径</returns>
         public static string ParseExcelURLs(List<DataTable> dts, string fileName)
@@ -77,10 +69,6 @@ namespace ConvertCustom.Server
         /// <summary>
         /// 获取NPOI
         /// </summary>
-        /// <param name="dts"></param>
-        /// <param name="type"></param>
-        /// <returns></returns>
-        /// <exception cref="ArgumentException"></exception>
         private static IWorkbook GetWorkbook(List<DataTable> dts, string type)
         {
             IWorkbook workbook;
@@ -122,9 +110,6 @@ namespace ConvertCustom.Server
         /// </summary>
         /// <param name="yzm2">生成的验证码(大写)</param>
         /// <param name="yzm3">生成的验证码</param>
-        /// <param name="width">宽</param>
-        /// <param name="height">长</param>
-        /// <param name="codeLength">字符数</param>
         /// <returns>图片base64格式</returns>
         public static string CreateVerifyImg(out string yzm2, out string yzm3, int width = 160, int height = 40, int codeLength = 4)
         {
