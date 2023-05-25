@@ -11,50 +11,6 @@ namespace ConvertCustom.Server
     public static class ModelType
     {
         /// <summary>
-        /// 实体映射
-        /// 只映射与Input相同的属性和字段
-        /// </summary>
-        /// <param name="output">输出</param>
-        /// <param name="input">输入</param>
-        public static void EntityMapper<Output, Input>(Output output, Input input) where Output : class where Input : class
-        {
-            Type outputType = typeof(Output);
-            Type inputType = typeof(Input);
-            // 属性
-            PropertyInfo[] properties = outputType.GetProperties();
-            foreach (PropertyInfo prop in properties)
-            {
-                PropertyInfo propInfo = inputType.GetProperty(prop.Name);
-                if (propInfo != null)
-                {
-                    object inValue = propInfo.GetValue(input);
-                    prop.SetValue(output, inValue);
-                }
-            }
-            // 字段
-            FieldInfo[] fields = outputType.GetFields();
-            foreach (FieldInfo field in fields)
-            {
-                FieldInfo fieldInfo = inputType.GetField(field.Name);
-                if (fieldInfo != null)
-                {
-                    object inValue2 = fieldInfo.GetValue(input);
-                    field.SetValue(output, inValue2);
-                }
-            }
-        }
-
-        /// <summary>
-        /// 实体映射
-        /// </summary>
-        public static Output EntityMapper<Output, Input>(Input input) where Output : class where Input : class
-        {
-            Output val = Activator.CreateInstance<Output>();
-            EntityMapper(val, input);
-            return val;
-        }
-
-        /// <summary>
         /// 可转枚举
         /// </summary>
         /// <typeparam name="K">notnull</typeparam>
@@ -128,6 +84,50 @@ namespace ConvertCustom.Server
             {
                 pi.SetValue(tempT, Convert.ChangeType(name, type), null);
             }
+        }
+
+        /// <summary>
+        /// 实体映射
+        /// 只映射与Input相同的属性和字段
+        /// </summary>
+        /// <param name="output">输出</param>
+        /// <param name="input">输入</param>
+        public static void EntityMapper<Output, Input>(Output output, Input input) where Output : class where Input : class
+        {
+            Type outputType = typeof(Output);
+            Type inputType = typeof(Input);
+            // 属性
+            PropertyInfo[] properties = outputType.GetProperties();
+            foreach (PropertyInfo prop in properties)
+            {
+                PropertyInfo propInfo = inputType.GetProperty(prop.Name);
+                if (propInfo != null)
+                {
+                    object inValue = propInfo.GetValue(input);
+                    prop.SetValue(output, inValue);
+                }
+            }
+            // 字段
+            FieldInfo[] fields = outputType.GetFields();
+            foreach (FieldInfo field in fields)
+            {
+                FieldInfo fieldInfo = inputType.GetField(field.Name);
+                if (fieldInfo != null)
+                {
+                    object inValue2 = fieldInfo.GetValue(input);
+                    field.SetValue(output, inValue2);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 实体映射
+        /// </summary>
+        public static Output EntityMapper<Output, Input>(Input input) where Output : class where Input : class
+        {
+            Output val = Activator.CreateInstance<Output>();
+            EntityMapper(val, input);
+            return val;
         }
     }
 }

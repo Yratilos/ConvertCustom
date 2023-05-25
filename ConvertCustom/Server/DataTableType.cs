@@ -11,9 +11,8 @@ namespace ConvertCustom.Server
     public static class DataTableType
     {
         /// <summary>
-        /// From ListDictionary
+        /// 泛型K不能为空
         /// </summary>
-        /// <typeparam name="K">notnull</typeparam>
         public static DataTable Parse<K, V>(List<Dictionary<K, V>> listDic)
         {
             DataTable dt = new DataTable();
