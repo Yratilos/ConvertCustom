@@ -1,12 +1,14 @@
 ## ALL
 ### Base type
 #### namespace ConvertCustom
+To return null<br/>
+Try return default<br/>
 ToBoolean<br/>
 ToDateTime<br/>
 ToDecimal<br/>
 ToDouble<br/>
 ToFloat<br/>
-ToInt
+ToInt<br/>
 
 > Like ToString,The error returns null
 

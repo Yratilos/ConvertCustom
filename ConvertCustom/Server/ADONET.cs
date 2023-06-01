@@ -91,7 +91,7 @@ namespace ConvertCustom.Server
         }
 
         /// <summary>
-        /// 获取数据值
+        /// 获取数据
         /// </summary>
         /// <param name="sql">... @value1=field1 and @value2=field2</param>
         /// <param name="param">

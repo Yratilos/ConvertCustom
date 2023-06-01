@@ -4,7 +4,7 @@
     {
         static void Main()
         {
-            //TestEnum();
+            TestEnum();
             //System.TestAttribute();
             //System.TestMapSystem(new System() { Linux = "Centos", Windows = "Win11" });
             //System.TestMapSystem(new System() { Linux = null, Windows = "" });
