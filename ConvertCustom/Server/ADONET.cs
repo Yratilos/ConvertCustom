@@ -1,4 +1,6 @@
-﻿using System.Data;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace ConvertCustom.Server
@@ -118,6 +120,64 @@ namespace ConvertCustom.Server
                     }
                 }
             }
+        }
+
+        /// <summary>
+        /// 执行事务
+        /// </summary>
+        /// <param name="hashtable">
+        /// Key:... @value1=field1 and @value2=field2
+        /// Value:
+        /// SqlParameter[] parameters = new SqlParameter[]{
+        ///     new SqlParameter("@field1",value1),
+        ///     new SqlParameter("@field2",value2),
+        /// }
+        /// </param>
+        /// <returns>是否成功</returns>
+        public bool ExecuteTrans(Hashtable hashtable)
+        {
+            using (SqlConnection conn = new SqlConnection(this.conn))
+            {
+                conn.Open();
+                using (SqlTransaction trans = conn.BeginTransaction())
+                {
+                    using (SqlCommand cmd = conn.CreateCommand())
+                    {
+                        foreach (DictionaryEntry item in hashtable)
+                        {
+                            cmd.CommandText = item.Key.ToString();
+                            if (item.Value is SqlParameter[])
+                            {
+                                cmd.Parameters.AddRange(item.Value as SqlParameter[]);
+                            }
+                            cmd.Transaction = trans;
+                            var c = cmd.ExecuteNonQuery();
+                            if (c <= 0)
+                            {
+                                trans.Rollback();
+                                return false;
+                            }
+                        }
+                        trans.Commit();
+                    }
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 执行事务
+        /// </summary>
+        /// <param name="hash">数据库操作语句</param>
+        /// <returns>是否成功</returns>
+        public bool ExecuteTrans(HashSet<string> hash)
+        {
+            var hashtable = new Hashtable();
+            foreach (var item in hash)
+            {
+                hashtable.Add(item, new SqlParameter[] { });
+            }
+            return ExecuteTrans(hashtable);
         }
     }
 }

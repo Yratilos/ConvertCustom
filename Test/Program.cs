@@ -4,7 +4,7 @@
     {
         static void Main()
         {
-            TestEnum();
+            //TestEnum();
             //System.TestAttribute();
             //System.TestMapSystem(new System() { Linux = "Centos", Windows = "Win11" });
             //System.TestMapSystem(new System() { Linux = null, Windows = "" });
@@ -17,6 +17,11 @@
             //}, out System newObj);
             //Console.WriteLine(newObj);
             //System.GetSummary<System>();
+            TestHashtable();
+        }
+
+        static public void TestHashtable()
+        {
         }
 
         /// <summary>
