@@ -32,8 +32,8 @@ namespace ConvertCustom.Server
         /// <param name="type">.xlsx/.xls</param>
         public static byte[] ParseExcelBytes(List<DataTable> dts, string type)
         {
-            FileStream fs = new FileStream(Guid.NewGuid().ToString() + type, FileMode.Create, FileAccess.ReadWrite);
-            GetWorkbook(dts, type).Write(fs);
+            FileStream fs;
+            GetWorkbook(dts, Guid.NewGuid() + type, out fs);
             fs = new FileStream(fs.Name, FileMode.Open);
             byte[] bytes = new byte[(int)fs.Length];
             fs.Read(bytes, 0, bytes.Length);
@@ -60,29 +60,29 @@ namespace ConvertCustom.Server
         /// <returns>文件本地路径</returns>
         public static string ParseExcelURLs(List<DataTable> dts, string fileName)
         {
-            var extension = Path.GetExtension(fileName);
-            FileStream fs = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite);
-            GetWorkbook(dts, extension).Write(fs);
+            FileStream fs;
+            GetWorkbook(dts, fileName, out fs);
             return fs.Name;
         }
 
         /// <summary>
-        /// 获取NPOI
+        /// 获取文件流
         /// </summary>
-        private static IWorkbook GetWorkbook(List<DataTable> dts, string type)
+        private static void GetWorkbook(List<DataTable> dts, string fileName, out FileStream fileStream)
         {
+            var extension = Path.GetExtension(fileName);
             IWorkbook workbook;
-            if (type == ".xlsx")
+            if (extension == ".xlsx")
             {
                 workbook = new XSSFWorkbook();
             }
-            else if (type == ".xls")
+            else if (extension == ".xls")
             {
                 workbook = new HSSFWorkbook();
             }
             else
             {
-                throw new ArgumentException("请添加文件名后缀为xlsx或lsx。");
+                throw new ArgumentException("请添加文件后缀.xlsx或.lsx。");
             }
             for (int d = 0; d < dts.Count; d++)
             {
@@ -102,7 +102,8 @@ namespace ConvertCustom.Server
                     }
                 }
             }
-            return workbook;
+            fileStream = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite);
+            workbook.Write(fileStream);
         }
 
         /// <summary>
