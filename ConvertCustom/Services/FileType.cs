@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
-namespace ConvertCustom.Server
+namespace ConvertCustom.Services
 {
     /// <summary>
     /// 转换二进制流

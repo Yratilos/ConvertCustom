@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 
-namespace ConvertCustom.Server
+namespace ConvertCustom.Services
 {
     /// <summary>
     /// 转换实体

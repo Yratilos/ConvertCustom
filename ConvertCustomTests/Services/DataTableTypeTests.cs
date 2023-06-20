@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Data;
 
-namespace ConvertCustom.Server.Tests
+namespace ConvertCustom.Services.Tests
 {
     [TestClass()]
     public class DataTableTypeTests

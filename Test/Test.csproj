@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <PackageReference Include="SqlSugarCore" Version="5.1.4.71" />
+    <PackageReference Include="System.Runtime.Caching" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>

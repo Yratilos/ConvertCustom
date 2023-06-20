@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace ConvertCustom.Server
+namespace ConvertCustom.Services
 {
     /// <summary>
     /// 转换字典

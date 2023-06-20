@@ -24,10 +24,10 @@ ModelType
 ModelType.EntityMapper
 
 ##### Other
-###### ADONET
+###### AdoNet
 > Simple database operations
 
-ADONET.GetInstance<br/>
+GetInstance<br/>
 ExecuteScalar<br/>
 Execute
 

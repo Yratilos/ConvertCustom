@@ -1,27 +1,26 @@
-﻿namespace Test
+﻿using ConvertCustom.IServices;
+using ConvertCustom.Services;
+using System.Runtime.Caching;
+using System.Security.Cryptography;
+using System.Text;
+
+namespace Test
 {
     internal class Program
     {
         static void Main()
         {
-            //TestEnum();
-            //System.TestAttribute();
-            //System.TestMapSystem(new System() { Linux = "Centos", Windows = "Win11" });
-            //System.TestMapSystem(new System() { Linux = null, Windows = "" });
-            //System.MapDictionaryToEntity(new Dictionary<string, string>
-            //{
-            //    {"Linux","Centos" },
-            //    {"Windows","Win11" },
-            //    {"Port","4" },
-            //    {"SystemEnum","Windows" },
-            //}, out System newObj);
-            //Console.WriteLine(newObj);
-            //System.GetSummary<System>();
-            TestHashtable();
+            //var n = new Program();
+            //var m = n[0];
+            //Console.WriteLine(m);
+            //ObjectCache cache = MemoryCache.Default;
+            //cache["1"] = 1;
         }
-
-        static public void TestHashtable()
+        List<string> array = new List<string>() { "1", "2" };
+        public string this[int param]
         {
+            get { return array[param]; }
+            set { array[param] = value; }
         }
 
         /// <summary>
