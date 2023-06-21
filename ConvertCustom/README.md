@@ -24,14 +24,14 @@ ModelType
 ModelType.EntityMapper
 
 ##### Other
-###### AdoNet
+###### AdoNetService
 > Simple database operations
 
 GetInstance<br/>
 ExecuteScalar<br/>
 Execute
 
-###### FileType
+###### FileService
 > Simple database operations
 
 CreateVerifyImg

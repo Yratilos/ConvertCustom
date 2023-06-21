@@ -1,118 +1,15 @@
-﻿using NPOI.HSSF.UserModel;
-using NPOI.SS.UserModel;
-using NPOI.XSSF.UserModel;
+﻿using ConvertCustom.IServices;
 using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
 
 namespace ConvertCustom.Services
 {
-    /// <summary>
-    /// 转换二进制流
-    /// </summary>
-    public static class FileType
+    public class FileService : IFile
     {
-        /// <summary>
-        /// Excel
-        /// NPOI生成文件，读取二进制流后删除文件
-        /// </summary>
-        /// <param name="type">.xlsx/.xls</param>
-        public static byte[] ParseExcelByte(DataTable dt, string type)
-        {
-            return ParseExcelBytes(new List<DataTable> { dt }, type);
-        }
-
-        /// <summary>
-        /// Excel
-        /// NPOI生成文件，读取二进制流后删除文件
-        /// </summary>
-        /// <param name="type">.xlsx/.xls</param>
-        public static byte[] ParseExcelBytes(List<DataTable> dts, string type)
-        {
-            FileStream fs;
-            GetWorkbook(dts, Guid.NewGuid() + type, out fs);
-            fs = new FileStream(fs.Name, FileMode.Open);
-            byte[] bytes = new byte[(int)fs.Length];
-            fs.Read(bytes, 0, bytes.Length);
-            fs.Close();
-            File.Delete(fs.Name);
-            return bytes;
-        }
-
-        /// <summary>
-        /// Excel
-        /// NPOI生成文件,不删除文件
-        /// </summary>
-        /// <param name="fileName">.xlsx/.xls后缀</param>
-        public static string ParseExcelURL(DataTable dt, string fileName)
-        {
-            return ParseExcelURLs(new List<DataTable> { dt }, fileName);
-        }
-
-        /// <summary>
-        /// Excel
-        /// NPOI生成文件,不删除文件
-        /// </summary>
-        /// <param name="fileName">.xlsx/.xls后缀</param>
-        /// <returns>文件本地路径</returns>
-        public static string ParseExcelURLs(List<DataTable> dts, string fileName)
-        {
-            FileStream fs;
-            GetWorkbook(dts, fileName, out fs);
-            return fs.Name;
-        }
-
-        /// <summary>
-        /// 获取文件流
-        /// </summary>
-        private static void GetWorkbook(List<DataTable> dts, string fileName, out FileStream fileStream)
-        {
-            var extension = Path.GetExtension(fileName);
-            IWorkbook workbook;
-            if (extension == ".xlsx")
-            {
-                workbook = new XSSFWorkbook();
-            }
-            else if (extension == ".xls")
-            {
-                workbook = new HSSFWorkbook();
-            }
-            else
-            {
-                throw new ArgumentException("请添加文件后缀.xlsx或.lsx。");
-            }
-            for (int d = 0; d < dts.Count; d++)
-            {
-                DataTable dt = dts[d];
-                ISheet sheet = (string.IsNullOrEmpty(dt.TableName) ? workbook.CreateSheet($"Sheet{d + 1}") : workbook.CreateSheet(dt.TableName));
-                IRow row = sheet.CreateRow(0);
-                for (int j = 0; j < dt.Columns.Count; j++)
-                {
-                    row.CreateCell(j).SetCellValue(dt.Columns[j].ColumnName);
-                }
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    IRow row2 = sheet.CreateRow(i + 1);
-                    for (int k = 0; k < dt.Columns.Count; k++)
-                    {
-                        row2.CreateCell(k).SetCellValue(dt.Rows[i][k].ToString());
-                    }
-                }
-            }
-            fileStream = new FileStream(fileName, FileMode.Create, FileAccess.ReadWrite);
-            workbook.Write(fileStream);
-        }
-
-        /// <summary>
-        /// 验证码图片
-        /// </summary>
-        /// <param name="yzm2">生成的验证码(大写)</param>
-        /// <param name="yzm3">生成的验证码</param>
-        /// <returns>图片base64格式</returns>
-        public static string CreateVerifyImg(out string yzm2, out string yzm3, int width = 160, int height = 40, int codeLength = 4)
+        public string CreateVerifyImg(out string yzm2, out string yzm3, int width = 160, int height = 40, int codeLength = 4)
         {
             // 创建一个画布
             Bitmap image = new Bitmap(width, height);
@@ -177,7 +74,7 @@ namespace ConvertCustom.Services
                     Brush brush = new SolidBrush(fontColor);
                     clist.Remove(fontColor);
                     // 画验证码，参数：验证码，字体，画刷，X轴位置，Y轴位置；
-                    g.DrawString(item.ToString(), font, brush, ran.Next(fontX + (fonts / 2), fontX + fonts), ran.Next(0, 7));
+                    g.DrawString(item.ToString(), font, brush, ran.Next(fontX + fonts / 2, fontX + fonts), ran.Next(0, 7));
                     fontX += fonts;
                 }
 

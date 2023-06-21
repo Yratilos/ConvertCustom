@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Reflection;
 
-namespace ConvertCustom.Services
+namespace ConvertCustom.Custom
 {
     /// <summary>
     /// 转换数据表
@@ -94,7 +94,7 @@ namespace ConvertCustom.Services
                         ICell value = sheet.GetRow(i).GetCell(j);
                         if (i == 0)
                         {
-                            dt.Columns.Add(((object)value).ToString());
+                            dt.Columns.Add(value.ToString());
                         }
                         else if (value == null)
                         {
@@ -102,7 +102,7 @@ namespace ConvertCustom.Services
                         }
                         else
                         {
-                            dr[dt.Columns[j].ToString()] = ((object)value).ToString();
+                            dr[dt.Columns[j].ToString()] = value.ToString();
                         }
                     }
                     if (i > 0)

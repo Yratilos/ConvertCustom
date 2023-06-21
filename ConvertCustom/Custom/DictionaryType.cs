@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 
-namespace ConvertCustom.Services
+namespace ConvertCustom.Custom
 {
     /// <summary>
     /// 转换字典
@@ -14,7 +14,7 @@ namespace ConvertCustom.Services
             Dictionary<K, V> dic = new Dictionary<K, V>();
             foreach (DataColumn dc in dr.Table.Columns)
             {
-                object value = ((dr[dc.ColumnName] == DBNull.Value) ? "" : dr[dc.ColumnName]);
+                object value = dr[dc.ColumnName] == DBNull.Value ? "" : dr[dc.ColumnName];
                 dic.Add((K)(object)dc.ColumnName, (V)value);
             }
             return dic;

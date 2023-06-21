@@ -9,9 +9,9 @@ namespace ConvertCustom.Services
     /// <summary>
     /// 数据库访问类
     /// </summary>
-    public class AdoNet : IAdoNet
+    public class AdoNetService : IAdoNet
     {
-        private static AdoNet instance = null;
+        private static AdoNetService instance = null;
         private static readonly object padlock = new object();
         private readonly string conn = "server={0};uid={1};pwd={2};database={3}";
 
@@ -20,7 +20,7 @@ namespace ConvertCustom.Services
         /// </summary>
         /// <param name="conn"></param>
         /// <returns></returns>
-        private AdoNet(string conn)
+        private AdoNetService(string conn)
         {
             this.conn = conn;
         }
@@ -33,12 +33,12 @@ namespace ConvertCustom.Services
         /// <param name="pwd">密码</param>
         /// <param name="database">数据库</param>
         /// <returns></returns>
-        private AdoNet(string server, string uid, string pwd, string database)
+        private AdoNetService(string server, string uid, string pwd, string database)
         {
             conn = string.Format(conn, server, uid, pwd, database);
         }
 
-        public static AdoNet GetInstance(string conn)
+        public static AdoNetService GetInstance(string conn)
         {
             if (instance is null)
             {
@@ -46,14 +46,14 @@ namespace ConvertCustom.Services
                 {
                     if (instance is null)
                     {
-                        instance = new AdoNet(conn);
+                        instance = new AdoNetService(conn);
                     }
                 }
             }
             return instance;
         }
 
-        public static AdoNet GetInstance(string server, string uid, string pwd, string database)
+        public static AdoNetService GetInstance(string server, string uid, string pwd, string database)
         {
             if (instance is null)
             {
@@ -61,7 +61,7 @@ namespace ConvertCustom.Services
                 {
                     if (instance is null)
                     {
-                        instance = new AdoNet(server, uid, pwd, database);
+                        instance = new AdoNetService(server, uid, pwd, database);
                     }
                 }
             }
