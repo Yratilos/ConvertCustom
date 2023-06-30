@@ -13,7 +13,7 @@ ToInt<br/>
 > Like ToString,The error returns null
 
 ### Advanced type
-#### namespace ConvertCustom.Server
+#### namespace ConvertCustom.Custom
 DataTableType<br/>
 DictionaryType<br/>
 FileType<br/>
@@ -23,6 +23,7 @@ ModelType
 
 ModelType.EntityMapper
 
+#### namespace ConvertCustom.Server
 ##### Other
 ###### AdoNetService
 > Simple database operations
