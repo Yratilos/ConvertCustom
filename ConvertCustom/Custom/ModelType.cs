@@ -78,7 +78,11 @@ namespace ConvertCustom.Custom
             }
             else if (type.IsEnum)
             {
-                pi.SetValue(tempT, Enum.Parse(type, name.ToString(), ignoreCase: false), null);
+                pi.SetValue(tempT, Enum.Parse(type, name.ToString(), false), null);
+            }
+            else if (type == typeof(string))
+            {
+                pi.SetValue(tempT, name.ToString(), null);
             }
             else
             {
