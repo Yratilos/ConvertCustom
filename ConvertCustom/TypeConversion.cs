@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 
 namespace ConvertCustom
 {
@@ -7,6 +8,32 @@ namespace ConvertCustom
     /// </summary>
     public static class TypeConversion
     {
+        /// <summary>
+        /// 首字母小写写
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string FirstToLower(this string input)
+        {
+            if (String.IsNullOrEmpty(input))
+                return input;
+            string str = input.First().ToString().ToLower() + input.Substring(1);
+            return str;
+        }
+
+        /// <summary>
+        /// 首字母大写
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public static string FirstToUpper(this string input)
+        {
+            if (String.IsNullOrEmpty(input))
+                return input;
+            string str = input.First().ToString().ToUpper() + input.Substring(1);
+            return str;
+        }
+
         public static bool? ToBoolean<T>(this T text)
         {
             if (bool.TryParse(text?.ToString(), out var result))
