@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 
 namespace ConvertCustom
@@ -8,12 +10,55 @@ namespace ConvertCustom
     /// </summary>
     public static class TypeConversion
     {
+        public static DbType ToDbType(this Type t)
+        {
+            if (Enum.TryParse(t.Name, out DbType dbt))
+            {
+                return dbt;
+            }
+            else
+            {
+                return DbType.String;
+            }
+        }
+
+        public static Type ToType(DbType dbt)
+        {
+            Dictionary<DbType, Type> typeMap = new Dictionary<DbType, Type>()
+            {
+                { DbType.UInt64, typeof(UInt64) },
+                { DbType.Int64, typeof(Int64) },
+                { DbType.Int32, typeof(Int32) },
+                { DbType.UInt32, typeof(UInt32) },
+                { DbType.Single, typeof(float) },
+                { DbType.Date, typeof(DateTime) },
+                { DbType.DateTime, typeof(DateTime) },
+                { DbType.Time, typeof(DateTime) },
+                { DbType.String, typeof(string) },
+                { DbType.StringFixedLength, typeof(string) },
+                { DbType.AnsiString, typeof(string) },
+                { DbType.AnsiStringFixedLength, typeof(string) },
+                { DbType.UInt16, typeof(UInt16) },
+                { DbType.Int16, typeof(Int16) },
+                { DbType.SByte, typeof(byte) },
+                { DbType.Object, typeof(object) },
+                { DbType.VarNumeric, typeof(decimal) },
+                { DbType.Decimal, typeof(decimal) },
+                { DbType.Currency, typeof(double) },
+                { DbType.Binary, typeof(byte[]) },
+                { DbType.Double, typeof(Double) },
+                { DbType.Guid, typeof(Guid) },
+                { DbType.Boolean, typeof(bool) }
+            };
+            return typeMap.ContainsKey(dbt) ? typeMap[dbt] : typeof(DBNull);
+        }
+
         /// <summary>
-        /// 首字母小写写
+        /// 首字母小写
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string FirstToLower(this string input)
+        public static string ToFirstLower(this string input)
         {
             if (String.IsNullOrEmpty(input))
                 return input;
@@ -26,7 +71,7 @@ namespace ConvertCustom
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        public static string FirstToUpper(this string input)
+        public static string ToFirstUpper(this string input)
         {
             if (String.IsNullOrEmpty(input))
                 return input;

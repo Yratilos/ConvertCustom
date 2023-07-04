@@ -9,8 +9,11 @@ ToDecimal<br/>
 ToDouble<br/>
 ToFloat<br/>
 ToInt<br/>
-FirstToLower<br/>
-FirstToUpper<br/>
+
+ToFirstLower<br/>
+ToFirstUpper<br/>
+ToDbType<br/>
+ToType<br/>
 
 > Like ToString,The error returns null
 
