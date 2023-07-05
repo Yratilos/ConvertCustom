@@ -33,24 +33,24 @@ namespace ConvertCustom.Custom
         /// <summary>
         /// 可转枚举
         /// </summary>
-        public static T Parse<T>(DataRow dr)
-        {
-            Type typeFromHandle = typeof(T);
-            object tempT = Activator.CreateInstance(typeFromHandle);
-            PropertyInfo[] properties = typeFromHandle.GetProperties();
-            foreach (PropertyInfo pi in properties)
-            {
-                Type type = pi.PropertyType;
-                if (dr.Table.Columns.Contains(pi.Name))
-                {
-                    object name = dr[pi.Name];
-                    SetField(tempT, pi, name, type);
-                }
-            }
-            return (T)tempT;
-        }
+        //public static T Parse<T>(DataRow dr)
+        //{
+        //    Type typeFromHandle = typeof(T);
+        //    object tempT = Activator.CreateInstance(typeFromHandle);
+        //    PropertyInfo[] properties = typeFromHandle.GetProperties();
+        //    foreach (PropertyInfo pi in properties)
+        //    {
+        //        Type type = pi.PropertyType;
+        //        if (dr.Table.Columns.Contains(pi.Name))
+        //        {
+        //            object name = dr[pi.Name];
+        //            SetField(tempT, pi, name, type);
+        //        }
+        //    }
+        //    return (T)tempT;
+        //}
 
-        public static T ParseTest<T>(DataRow row) where T : class, new()
+        public static T Parse<T>(DataRow row) where T : class, new()
         {
             T model = new T();
         
@@ -77,7 +77,7 @@ namespace ConvertCustom.Custom
         /// <summary>
         /// 可转枚举
         /// </summary>
-        public static List<T> ParseList<T>(DataTable dt)
+        public static List<T> ParseList<T>(DataTable dt) where T : class, new()
         {
             List<T> list = new List<T>();
             foreach (DataRow dr in dt.Rows)
