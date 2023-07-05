@@ -50,6 +50,30 @@ namespace ConvertCustom.Custom
             return (T)tempT;
         }
 
+        public static T ParseTest<T>(DataRow row) where T : class, new()
+        {
+            T model = new T();
+        
+            foreach (DataColumn column in row.Table.Columns)
+            {
+                var property = typeof(T).GetProperty(column.ColumnName);
+                if (property != null && row[column] != DBNull.Value)
+                {
+                    if (property.PropertyType.IsEnum)
+                    {
+                        var enumValue = Enum.Parse(property.PropertyType, row[column].ToString());
+                        property.SetValue(model, enumValue);
+                    }
+                    else
+                    {
+                        property.SetValue(model, Convert.ChangeType(row[column], property.PropertyType));
+                    }
+                }
+            }
+        
+            return model;
+        }
+
         /// <summary>
         /// 可转枚举
         /// </summary>
