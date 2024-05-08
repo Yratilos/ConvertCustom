@@ -22,7 +22,7 @@ namespace ConvertCustom
             }
         }
 
-        public static Type ToType(DbType dbt)
+        public static Type ToType(this DbType dbt)
         {
             Dictionary<DbType, Type> typeMap = new Dictionary<DbType, Type>()
             {
