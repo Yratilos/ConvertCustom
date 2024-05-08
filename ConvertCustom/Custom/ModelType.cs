@@ -53,7 +53,7 @@ namespace ConvertCustom.Custom
         public static T Parse<T>(DataRow row) where T : class, new()
         {
             T model = new T();
-        
+
             foreach (DataColumn column in row.Table.Columns)
             {
                 var property = typeof(T).GetProperty(column.ColumnName);
@@ -64,13 +64,17 @@ namespace ConvertCustom.Custom
                         var enumValue = Enum.Parse(property.PropertyType, row[column].ToString());
                         property.SetValue(model, enumValue);
                     }
+                    else if (property.PropertyType == typeof(DateTime?))
+                    {
+                        property.SetValue(model, Convert.ChangeType(row[column], typeof(DateTime)));
+                    }
                     else
                     {
                         property.SetValue(model, Convert.ChangeType(row[column], property.PropertyType));
                     }
                 }
             }
-        
+
             return model;
         }
 
