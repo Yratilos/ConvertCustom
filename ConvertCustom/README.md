@@ -27,17 +27,3 @@ ModelType
 > Like Parse,And also Parse*
 
 ModelType.EntityMapper
-
-#### namespace ConvertCustom.Server
-##### Other
-###### AdoNetService
-> Simple database operations
-
-GetInstance<br/>
-ExecuteScalar<br/>
-Execute
-
-###### FileService
-> Simple database operations
-
-CreateVerifyImg
